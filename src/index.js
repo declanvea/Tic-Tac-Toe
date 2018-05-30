@@ -12,15 +12,20 @@ const style = {
     padding: '0 30px',
     boxShadow: '0 3px 5px 2px rgba( 255, 105, 135, .30 )',
  };
- const buttonBoard = {
-     background: '#0D47A1',
-     color: '#A7FFEB',
-     border: '0.5px solid #A7FFEB',
+ const xSquare = {
+   background: '#0D47A1',
+   border: '1px solid #A7FFEB',
+   color: '#A7FFEB',
  };
+ const oSquare = {
+   background: '#A7FFEB',
+   border: '1px solid #0D47A1',
+   color: '#0D47A1',
+ }
 
 function Square( props ) { 
   return ( 
-    <Button style={buttonBoard} className="square" onClick={ props.onClick }>
+    <Button style={props.xIsNext ? xSquare : oSquare} className="square" onClick={ props.onClick }>
       { props.value }
     </Button>
    );
@@ -32,6 +37,7 @@ class Board extends React.Component {
       <Square
         value={ this.props.squares[i] }
         onClick={ (  ) => this.props.onClick( i ) }
+        xIsNext={this.props.xIsNext}
       />
      );
    }
@@ -132,6 +138,7 @@ class Game extends React.Component {
           <Board
             squares={ current.squares }
             onClick={ ( i ) => this.handleClick( i ) }
+            xIsNext={this.state.xIsNext}
           />
         </div>
         <div className="game-info">
